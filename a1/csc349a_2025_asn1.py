@@ -68,19 +68,34 @@ print(f"Relative Error: {e_a:8.4f}")
 
 def skyfall_euler2(m,k,g,t0,v0,tn,n):
   # modify code as described above to return the right array of times and values
+  # computer step size h
+  h = (tn-t0)/n
+  # set t, v to initial values
+  t = t0
+  v = v0
+
+  # allocate array for result
   result = np.zeros((n+1,2))
+  result[0] = [t,v]
+  # compute v(t) over n time steps using Euler’s method
+  for i in range(1,n+1):
+    v=v+(g-k/m*v**2)*h
+    t=t+h
+    result[i,:] = [t,v]
   return result
 
 result_2a = skyfall_euler2(73.5,0.234,9.81,0,0,18,72)
-# output_values(result_2a)
+output_values(result_2a)
 
 def skyfall_analytic2(g,m,k,t):
   # modify code as described above to return the right value
-  return 0
+  # v(t) = sqrt(gm/k) * tanh(sqrt(gk/m) * t)
+  return math.sqrt(g*m/k) * math.tanh(math.sqrt(g*k/m) * t)
 
 def skyfall_numeric2(g,m,c,t):
   # modify code as described above to return the right value
-  return 0
+  skyfall_e = skyfall_euler2(m, k, g, 0, 0, 72)
+  return skyfall_e[-1,1]
 
 
 p =  skyfall_analytic2(9.81, 73.5, 0.234, 18)
@@ -90,21 +105,28 @@ e_a = relative_error(p, pstar)
 relative_error_scientific = f"{e_a:e}"  # Using f-string
 print(relative_error_scientific)
 
-import math
 
 # enegx_Taylor1 Approximates e^(-x) with the
 # nth degree McLaurin polynomial for e^(-x)
 
 def enegx_Taylor1(x,n):
   # modify code as described above to return the right value
-  return 0
+  result = 0
+  for i in range(n+1):
+    term = ((-x) ** i) / math.factorial(i)
+    result += term
+  return result
 
 # enegx_Taylor2 Approximates e^(-x) with 1 over
 # the nth degree McLaurin polynomial for e^x
 
 def enegx_Taylor2(x,n):
   # modify code as described above to return the right value
-  return fx
+  denominator = 0
+  for i in range(n+1):
+    term = (x ** i) / math.factorial(i)
+    denominator += term
+  return 1 / denominator
 
 
 # approximations1 =
