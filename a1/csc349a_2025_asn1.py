@@ -41,7 +41,7 @@ result_1b = skyfall_euler(62.8, 12.5, 9.81, 0, 0, 12, 15)
 
 
 # Your code goes here
-result_1c = skyfall_euler(68.1, 12.5, 9.81, 0, 0, 12, 15)
+result_1c = skyfall_euler(62.8, 12.5, 3.71, 0, 0, 12, 15)
 
 def skyfall_analytic(g,m,c,t):
   # modify code as described above to return the right value
