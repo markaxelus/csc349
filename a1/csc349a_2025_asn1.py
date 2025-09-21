@@ -1,5 +1,6 @@
 import math
 import numpy as np
+import matplotlib.pyplot as plt
 
 # compute the Euler-based numerical approximation
 # to the falling parachutist problem
@@ -92,10 +93,10 @@ def skyfall_analytic2(g,m,k,t):
   # v(t) = sqrt(gm/k) * tanh(sqrt(gk/m) * t)
   return math.sqrt(g*m/k) * math.tanh(math.sqrt(g*k/m) * t)
 
-def skyfall_numeric2(g,m,c,t):
+def skyfall_numeric2(g,m,k,t):
   # modify code as described above to return the right value
-  skyfall_e = skyfall_euler2(m, k, g, 0, 0, 72)
-  return skyfall_e[-1,1]
+  skyfall_e2 = skyfall_euler2(m, k, g, 0, 0, t, 72)
+  return skyfall_e2[-1,1]
 
 
 p =  skyfall_analytic2(9.81, 73.5, 0.234, 18)
@@ -113,7 +114,7 @@ def enegx_Taylor1(x,n):
   # modify code as described above to return the right value
   result = 0
   for i in range(n+1):
-    term = ((-x) ** i) / math.factorial(i)
+    term = ((-1)**i) * (x**i) / math.factorial(i)
     result += term
   return result
 
@@ -128,49 +129,46 @@ def enegx_Taylor2(x,n):
     denominator += term
   return 1 / denominator
 
+approximations1 = np.array([enegx_Taylor1(2.0, n) for n in range(1, 6)])
+approximations2 = np.array([enegx_Taylor2(2.0, n) for n in range(1, 6)])
+exact = np.exp(-2.0)
 
-# approximations1 =
-# approximations2 =
-# exact =
+print(exact)
+print(approximations1)
+print(approximations2)
 
-# print(exact)
-# print(approximations1)
-# print(approximations2)
+relative_error1 = np.abs(exact - approximations1) / np.abs(exact)
+relative_error2 = np.abs(exact - approximations2) / np.abs(exact)
 
-# relative_error1 =
-# relative_error2 =
+print(relative_error1)
+print(relative_error2)
 
-# print(relative_error1)
-# print(relative_error2)
-
-
-import matplotlib.pyplot as plt
 
 # your code goes here
 fig, ax = plt.subplots()
+exact_values = np.full(5, exact)
 
-
-plt.plot([1.0, 3.0, -2.0, 5.0, 1.5], label='Random')
-# random plot - remove in your submission
-
+plt.plot(approximations1, 'b-', label="Approximation1 (Direct McLaurin)")
+plt.plot(approximations2, color="orange", linestyle='-', label="Approximation2 (Reciprocal)")
+plt.plot(exact_values, 'g-', label="Exact")
 # Add labels and title
 plt.xlabel("Order of polynomial approximation")
 plt.ylabel("Approximate value of function")
 
 # change title appropriately
-plt.title("Random Plot")
+plt.title("Approximations of e^(-2.0) with Taylor Series")
 
 plt.legend()
 # save the plot to a file
 plt.savefig("csc349a_asn1_q3.png", dpi=300, bbox_inches='tight')
 
 # Display the plot
-# plt.show()
+plt.show()
 
 
 # set the best approximation to either "Approximation 1" or "Approximation 2"
 # depending on which one you consider best
-# best_approximation =
+best_approximation = "Approximation 2"
 
 
 
