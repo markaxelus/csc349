@@ -1,4 +1,4 @@
-
+import math
 import numpy as np
 
 # compute the Euler-based numerical approximation
@@ -33,27 +33,28 @@ def output_values(result):
     print(f"{t:8.3f} {v:19.4f}")
 
 # Your code goes here
-# result_1a =
+result_1a = skyfall_euler(68.1, 12.5, 9.81, 0, 0, 12, 6)
 
 # Your code goes here
-# result_1b =
+result_1b = skyfall_euler(62.8, 12.5, 9.81, 0, 0, 12, 15)
 
 
 # Your code goes here
-# result_1c =
+result_1c = skyfall_euler(62.8, 12.5, 9.81, 0, 0, 12, 15)
 
 def skyfall_analytic(g,m,c,t):
   # modify code as described above to return the right value
-  return 0
+  return ((g*m)/c) * (1 - math.exp(-c*t/m))
 
 def relative_error(exact, approximate):
   # modify code as described above to return the right value
-  return 0
+  return abs(exact - approximate) / abs(exact)
 
 
 def skyfall_numeric(g,m,c,t):
   # modify code as described above to return the right value
-  return 0
+  skyfall_e = skyfall_euler(m, c, g, 0, 0, t, 15)
+  return skyfall_e[-1,1]
 
 # this code will display the relative error once the functions are
 # implemented correctly
