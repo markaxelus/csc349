@@ -41,7 +41,7 @@ result_1b = skyfall_euler(62.8, 12.5, 9.81, 0, 0, 12, 15)
 
 
 # Your code goes here
-result_1c = skyfall_euler(62.8, 12.5, 9.81, 0, 0, 12, 15)
+result_1c = skyfall_euler(68.1, 12.5, 9.81, 0, 0, 12, 15)
 
 def skyfall_analytic(g,m,c,t):
   # modify code as described above to return the right value
@@ -131,7 +131,7 @@ def enegx_Taylor2(x,n):
 
 approximations1 = np.array([enegx_Taylor1(2.0, n) for n in range(1, 6)])
 approximations2 = np.array([enegx_Taylor2(2.0, n) for n in range(1, 6)])
-exact = np.exp(-2.0)
+exact = np.full(5, np.exp(-2.0))
 
 print(exact)
 print(approximations1)
